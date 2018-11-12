@@ -1,17 +1,25 @@
 package graduation.choosecafe.model;
 
-public class Lunch {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
-    private Integer id;
+@Entity
+@Table(name="lunches")
+public class Lunch extends AbstractBaseEntity{
+
+    @Column(name = "name", nullable = false)
+    @NotBlank
+    @Size(max = 100)
     private String name;
+
+    @Column(name = "menu", nullable = false)
+    @Size(max = 250)
     private String menu;
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
+    public Lunch() {
     }
 
     public String getName() {
