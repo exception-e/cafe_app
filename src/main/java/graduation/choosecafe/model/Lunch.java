@@ -1,25 +1,39 @@
 package graduation.choosecafe.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Map;
+import java.util.Set;
 
 @Entity
 @Table(name="lunches")
 public class Lunch extends AbstractBaseEntity{
 
-    @Column(name = "name", nullable = false)
-    @NotBlank
+    @Column(name = "name")
     @Size(max = 100)
+    @NotNull
+    @NotBlank
     private String name;
 
-    @Column(name = "menu", nullable = false)
+    @Column(name = "menu")
     @Size(max = 250)
     private String menu;
 
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "voting_id")
+    @NotNull
+    private Voting voting;
+
     public Lunch() {
+    }
+
+    public Lunch(String name, String menu, Voting voting) {
+        this.name = name;
+        this.menu = menu;
+        this.voting = voting;
     }
 
     public String getName() {
@@ -36,5 +50,13 @@ public class Lunch extends AbstractBaseEntity{
 
     public void setMenu(String menu) {
         this.menu = menu;
+    }
+
+    public Voting getVoting() {
+        return voting;
+    }
+
+    public void setVoting_id(Voting voting) {
+        this.voting = voting;
     }
 }

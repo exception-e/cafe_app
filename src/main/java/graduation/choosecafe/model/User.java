@@ -33,9 +33,16 @@ public class User extends AbstractBaseEntity{
     @BatchSize(size = 200)
     private Set<Role> roles;
 
+    @OneToMany
+    private Set<Vote> votes;
+
     public User() {
     }
 
+    public User(@Email @NotBlank @Size(max = 100) String email, @NotBlank @Size(min = 5, max = 100) String password) {
+        this.email = email;
+        this.password = password;
+    }
 
     public String getEmail() {
         return email;

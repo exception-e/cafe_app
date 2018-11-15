@@ -14,32 +14,38 @@ import java.util.Set;
 @Table(name="votings")
 public class Voting extends AbstractBaseEntity{
 
-    @Column(name = "voting_date", nullable = false)
-    @NotNull
+    @Column(name = "voting_date")
+    //@NotNull доделать со спрингом
     private LocalDate date;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "result", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @NotNull
-    private Lunch result;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "voting_variants", joinColumns = @JoinColumn(name = "voting_id"))
+    //private Lunch result;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "voting")
     @OnDelete(action = OnDeleteAction.CASCADE)
     @BatchSize(size = 200)
     private Set<Lunch> variants;
 
 
-    @JoinTable(name = "voting_process", joinColumns = @JoinColumn(name = "voting_id"))
-    @OneToMany(fetch = FetchType.LAZY)
-    @OnDelete(action = OnDeleteAction.CASCADE)
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "voting")
     @BatchSize(size = 200)
-    private Map<User,Lunch> votingProcess;
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    //@JoinTable(name = "voting_process", joinColumns = @JoinColumn(name = "voting_id"))
+    //@CollectionTable(name = "voting_process", joinColumns = @JoinColumn(name = "voting_id"))
+    //@MapKeyJoinColumn(name = "user_id")
+    private Set<Vote> votes;
 
     public Voting() {
     }
 
+    public Set<Vote> getVotes()
+    {
+        return votes;
+    }
+
+    public Voting(LocalDate date) {
+    }
 
     public LocalDate getDate() {
         return date;
@@ -47,14 +53,6 @@ public class Voting extends AbstractBaseEntity{
 
     public void setDate(LocalDate date) {
         this.date = date;
-    }
-
-    public Lunch getResult() {
-        return result;
-    }
-
-    public void setResult(Lunch result) {
-        this.result = result;
     }
 
     public Set<Lunch> getVariants() {
@@ -65,11 +63,5 @@ public class Voting extends AbstractBaseEntity{
         this.variants = variants;
     }
 
-    public Map<User, Lunch> getVotingProcess() {
-        return votingProcess;
-    }
 
-    public void setVotingProcess(Map<User, Lunch> votingData) {
-        this.votingProcess = votingData;
-    }
 }
