@@ -14,6 +14,10 @@ import java.util.Set;
 @Table(name = "users")
 public class User extends AbstractBaseEntity{
 
+    @Column(name = "name")
+    @Size(max = 100)
+    private String name;
+
     @Column(name = "email", nullable = false, unique = true)
     @Email
     @NotBlank
@@ -33,15 +37,21 @@ public class User extends AbstractBaseEntity{
     @BatchSize(size = 200)
     private Set<Role> roles;
 
-    @OneToMany
-    private Set<Vote> votes;
-
     public User() {
     }
 
-    public User(@Email @NotBlank @Size(max = 100) String email, @NotBlank @Size(min = 5, max = 100) String password) {
+    public User(@Size(max = 100) String name, @Email @NotBlank @Size(max = 100) String email, @NotBlank @Size(min = 5, max = 100) String password) {
+        this.name = name;
         this.email = email;
         this.password = password;
+    }
+
+    public User(Integer id, @Size(max = 100) String name, @Email @NotBlank @Size(max = 100) String email, @NotBlank @Size(min = 5, max = 100) String password, Role... role) {
+        super(id);
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.roles = roles;
     }
 
     public String getEmail() {
@@ -66,5 +76,16 @@ public class User extends AbstractBaseEntity{
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", roles=" + roles +
+                ", id=" + id +
+                '}';
     }
 }

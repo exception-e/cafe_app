@@ -3,11 +3,11 @@ package graduation.choosecafe.model;
 import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
-import java.util.Map;
 import java.util.Set;
 
 @Entity
@@ -15,11 +15,10 @@ import java.util.Set;
 public class Voting extends AbstractBaseEntity{
 
     @Column(name = "voting_date")
-    //@NotNull доделать со спрингом
+    //@NotNull
+    @DateTimeFormat()
     private LocalDate date;
 
-
-    //private Lunch result;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "voting")
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -31,9 +30,6 @@ public class Voting extends AbstractBaseEntity{
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "voting")
     @BatchSize(size = 200)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    //@JoinTable(name = "voting_process", joinColumns = @JoinColumn(name = "voting_id"))
-    //@CollectionTable(name = "voting_process", joinColumns = @JoinColumn(name = "voting_id"))
-    //@MapKeyJoinColumn(name = "user_id")
     private Set<Vote> votes;
 
     public Voting() {
@@ -63,5 +59,13 @@ public class Voting extends AbstractBaseEntity{
         this.variants = variants;
     }
 
-
+    @Override
+    public String toString() {
+        return "Voting{" +
+                "date=" + date +
+                ", variants=" + variants +
+                ", votes=" + votes +
+                ", id=" + id +
+                '}';
+    }
 }

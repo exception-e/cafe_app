@@ -50,4 +50,14 @@ public class Vote extends AbstractBaseEntity {
     public void setLunch(Lunch lunch) {
         this.lunch = lunch;
     }
+
+    @Override
+    public String toString() {
+        return "Vote{" +
+                "voting=" + voting +
+                ", user=" + user +
+                ", lunch=" + lunch +
+                ", id=" + id +
+                '}';
+    }
 }
