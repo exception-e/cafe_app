@@ -6,20 +6,20 @@
         <setting name="validation-enabled" value="true" />
         <setting name="provider-name" value="Hibernate" />
         <datasource-mapping>
+          <factory-entry name="Entities" />
           <factory-entry name="entityManagerFactory" value="7ecc313d-26d3-4b93-84ed-1919207510a0" />
           <factory-entry name="graduation.choosecafe.jpa" value="7ecc313d-26d3-4b93-84ed-1919207510a0" />
         </datasource-mapping>
-        <deploymentDescriptor name="persistence.xml" url="file://$MODULE_DIR$/src/main/resources/META-INF/persistence.xml" />
       </configuration>
     </facet>
     <facet type="Spring" name="Spring">
-      <configuration>
+      <configuration process_explicitly_annotated="false">
         <fileset id="fileset" name="Spring Application Context" removed="false">
           <file>file://$MODULE_DIR$/src/main/resources/spring/application.xml</file>
         </fileset>
         <fileset id="fileset2" name="Spring MVC" removed="false">
           <dependency>fileset</dependency>
-          <file>file://$MODULE_DIR$/src/main/resources/spring/mvc.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/spring/spring-servlet.xml</file>
         </fileset>
       </configuration>
     </facet>

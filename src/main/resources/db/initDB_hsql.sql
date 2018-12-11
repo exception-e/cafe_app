@@ -60,7 +60,7 @@ create table voting_process
 
   constraint users_vote unique (voting_id, user_id),
   foreign key (voting_id) references VOTINGS (id),
-  foreign key (user_id) references users (id),
+  foreign key (user_id) references users (id) on delete cascade ,
   foreign key (lunch_id) references lunches (id)
 );
 

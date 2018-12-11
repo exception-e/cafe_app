@@ -1,6 +1,7 @@
 package graduation.choosecafe.service;
 
 
+import graduation.choosecafe.model.Role;
 import org.springframework.core.env.Environment;
 import graduation.choosecafe.service.UserService;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,14 +13,14 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlConfig;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
-import static graduation.choosecafe.UserTestData.ADMIN;
-import static graduation.choosecafe.UserTestData.USER;
-import static graduation.choosecafe.UserTestData.assertMatch;
+import java.util.Collections;
+import java.util.List;
+
+import static graduation.choosecafe.UserTestData.*;
 
 @SpringJUnitConfig(locations =
         "classpath:spring/application.xml"
 )
-//@ExtendWith(SpringExtension.class)
 @Sql(scripts = "classpath:db/populateDB.sql", config = @SqlConfig(encoding = "UTF-8"))
 
 public class UserServiceTest {
@@ -45,10 +46,24 @@ public class UserServiceTest {
         assertMatch(service.getAll(),  USER, ADMIN, newUser);
     }
 
+    @Test
+    void getAll() throws Exception {
+        List<User> all = service.getAll();
+        assertMatch(all, USER, ADMIN);
+    }
+
     /*@Test
     void duplicateMailCreate() throws Exception {
         assertThrows(DataAccessException.class, () ->
                 service.create(new User(null, "Duplicate", "user@yandex.ru", "newPass", Role.ROLE_USER)));
+    }*/
+
+    @Test
+    void update() throws Exception {
+        User updated = new User(USER);
+        updated.setName("UpdatedName");
+        service.update(new User(updated));
+        assertMatch(service.get(USER_ID), updated);
     }
 
     @Test
@@ -57,11 +72,11 @@ public class UserServiceTest {
         assertMatch(service.getAll(), ADMIN);
     }
 
-    @Test
+    /*@Test
     void deletedNotFound() throws Exception {
         assertThrows(NotFoundException.class, () ->
                 service.delete(1));
-    }
+    }*/
 
     @Test
     void get() throws Exception {
@@ -69,7 +84,7 @@ public class UserServiceTest {
         assertMatch(user, ADMIN);
     }
 
-    @Test
+    /*@Test
     void getNotFound() throws Exception {
         assertThrows(NotFoundException.class, () ->
                 service.get(1));
@@ -81,21 +96,9 @@ public class UserServiceTest {
         assertMatch(user, ADMIN);
     }
 
-    @Test
-    void update() throws Exception {
-        User updated = new User(USER);
-        updated.setName("UpdatedName");
-        updated.setCaloriesPerDay(330);
-        updated.setRoles(Collections.singletonList(Role.ROLE_ADMIN));
-        service.update(new User(updated));
-        assertMatch(service.get(USER_ID), updated);
-    }
 
-    @Test
-    void getAll() throws Exception {
-        List<User> all = service.getAll();
-        assertMatch(all, ADMIN, USER);
-    }
+
+
 
     @Test
     void enable() {

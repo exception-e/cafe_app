@@ -1,6 +1,7 @@
 package graduation.choosecafe.web;
 
 import graduation.choosecafe.model.User;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -61,4 +62,5 @@ public class AdminRestController extends AbstractUserController
     public User getByMail(@RequestParam("email") String email) {
         return super.getByMail(email);
     }
+
 }

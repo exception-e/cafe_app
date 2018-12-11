@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="choosecafe:Web exploded">
+    <output-path>$PROJECT_DIR$/target/choosecafe</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="choosecafe/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="choosecafe" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>
