@@ -1,6 +1,7 @@
 package graduation.choosecafe.service;
 
 import graduation.choosecafe.model.Lunch;
+import graduation.choosecafe.model.Restaurant;
 import graduation.choosecafe.model.Vote;
 import graduation.choosecafe.repository.VoteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,13 +35,10 @@ public class VoteServiceImpl implements VoteService {
         return repository.getOne(id);
     }
 
-    @Override
-    public List<Vote> getByLunch(Lunch lunch) {
-        return repository.findVotesByLunch(lunch);
-    }
 
     @Override
-    public List<Vote> getByVoting(Voting voting) {
-        return repository.findVotesByVoting(voting);
+    public List<Vote> getByRestaurant(Restaurant restaurant)
+    {
+        return repository.findVotesByRestaurant(restaurant);
     }
 }

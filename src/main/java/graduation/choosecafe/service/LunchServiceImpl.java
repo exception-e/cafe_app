@@ -1,6 +1,7 @@
 package graduation.choosecafe.service;
 
 import graduation.choosecafe.model.Lunch;
+import graduation.choosecafe.model.Restaurant;
 import graduation.choosecafe.repository.LunchRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,7 +40,8 @@ public class LunchServiceImpl implements LunchService {
     }
 
     @Override
-    public List<Lunch> getByVoting(Voting voting) {
-        return repository.fildLunchesbyVoting(voting);
+    public List<Lunch> getByRestaurant(Restaurant restaurant) {
+
+        return repository.findLunchesByRestaurant(restaurant);
     }
 }
