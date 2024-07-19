@@ -16,6 +16,7 @@ public class User extends AbstractBaseEntity{
 
     @Column(name = "name")
     @Size(max = 100)
+    @NotBlank
     private String name;
 
     @Column(name = "email", nullable = false, unique = true)
@@ -31,7 +32,7 @@ public class User extends AbstractBaseEntity{
 
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Enumerated(EnumType.STRING)
-    @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
+    @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
     @Column(name = "role")
     @ElementCollection(fetch = FetchType.EAGER)
     @BatchSize(size = 200)

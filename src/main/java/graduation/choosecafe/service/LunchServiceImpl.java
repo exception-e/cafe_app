@@ -1,7 +1,6 @@
 package graduation.choosecafe.service;
 
 import graduation.choosecafe.model.Lunch;
-import graduation.choosecafe.model.Voting;
 import graduation.choosecafe.repository.LunchRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -2,7 +2,6 @@ package graduation.choosecafe.service;
 
 import graduation.choosecafe.model.Lunch;
 import graduation.choosecafe.model.Vote;
-import graduation.choosecafe.model.Voting;
 
 import java.util.List;
 

@@ -2,7 +2,6 @@ package graduation.choosecafe.repository;
 
 import graduation.choosecafe.model.Lunch;
 import graduation.choosecafe.model.Vote;
-import graduation.choosecafe.model.Voting;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

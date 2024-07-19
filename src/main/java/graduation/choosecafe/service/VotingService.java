@@ -1,7 +1,5 @@
 package graduation.choosecafe.service;
 
-import graduation.choosecafe.model.Voting;
-
 import java.time.LocalDate;
 
 public interface VotingService {

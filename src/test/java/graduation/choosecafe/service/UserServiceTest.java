@@ -1,19 +1,15 @@
 package graduation.choosecafe.service;
 
 
-import graduation.choosecafe.model.Role;
 import org.springframework.core.env.Environment;
-import graduation.choosecafe.service.UserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.CacheManager;
 import graduation.choosecafe.model.User;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlConfig;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
-import java.util.Collections;
 import java.util.List;
 
 import static graduation.choosecafe.UserTestData.*;
@@ -21,7 +17,7 @@ import static graduation.choosecafe.UserTestData.*;
 @SpringJUnitConfig(locations =
         "classpath:spring/application.xml"
 )
-@Sql(scripts = "classpath:db/populateDB.sql", config = @SqlConfig(encoding = "UTF-8"))
+@Sql(scripts = "classpath:db/populateDB_hsql.sql", config = @SqlConfig(encoding = "UTF-8"))
 
 public class UserServiceTest {
     @Autowired

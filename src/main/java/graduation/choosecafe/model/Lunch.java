@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.Set;
 
 @Entity
-@Table(name="lunches")
+@Table(name="lunch")
 public class Lunch extends AbstractBaseEntity{
 
     @Column(name = "name")
@@ -17,23 +17,20 @@ public class Lunch extends AbstractBaseEntity{
     @NotBlank
     private String name;
 
-    @Column(name = "menu")
-    @Size(max = 250)
-    private String menu;
-
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "voting_id")
+    @Column(name = "price")
     @NotNull
-    private Voting voting;
+    private Integer price;
+
+    @ManyToOne
+    @JoinColumn(name = "id")
+    Restaurant restaurant;
 
     public Lunch() {
     }
 
-    public Lunch(String name, String menu, Voting voting) {
+    public Lunch(String name, Integer price) {
         this.name = name;
-        this.menu = menu;
-        this.voting = voting;
+        this.price = price;
     }
 
     public String getName() {
@@ -44,28 +41,19 @@ public class Lunch extends AbstractBaseEntity{
         this.name = name;
     }
 
-    public String getMenu() {
-        return menu;
+    public Integer getPrice() {
+        return price;
     }
 
-    public void setMenu(String menu) {
-        this.menu = menu;
-    }
-
-    public Voting getVoting() {
-        return voting;
-    }
-
-    public void setVoting(Voting voting) {
-        this.voting = voting;
+    public void setPrice(Integer price) {
+        this.price = price;
     }
 
     @Override
     public String toString() {
         return "Lunch{" +
                 "name='" + name + '\'' +
-                ", menu='" + menu + '\'' +
-                ", voting=" + voting +
+                ", price=" + price +
                 ", id=" + id +
                 '}';
     }

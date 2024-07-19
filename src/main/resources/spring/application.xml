@@ -16,7 +16,7 @@
 
     <jdbc:initialize-database data-source="dataSource" enabled="${database.init}">
         <jdbc:script location="classpath:db/initDB_hsql.sql"/>
-        <jdbc:script encoding="utf-8" location="classpath:db/populateDB.sql"/>
+        <jdbc:script encoding="utf-8" location="classpath:db/populateDB_hsql.sql"/>
     </jdbc:initialize-database>
 
     <context:component-scan base-package="graduation.choosecafe.**.repository"/>
