@@ -6,7 +6,7 @@ build environment: JetBrains Intellij Idea
 DB creation script - src/main/resources/db/initDB_hsql.sql.
 DB population script - src/main/resources/db/populateDB_hsql.sql.
 
-## Application with REST API using Hibernate/Spring/SpringMVC (or Spring-Boot) without frontend.
+## Application with REST API using Hibernate/Spring/SpringMVC without frontend.
 
 A voting system for deciding where to have lunch.
 
