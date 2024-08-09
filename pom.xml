@@ -5,6 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>ru.graduation</groupId>
     <artifactId>cafeapp</artifactId>
+    <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
 
     <name>Cafe app</name>
@@ -99,8 +100,8 @@
                         </configuration>
                         <deployables>
                             <deployable>
-                                <groupId>ru.javawebinar</groupId>
-                                <artifactId>topjava</artifactId>
+                                <groupId>ru.choosecafe</groupId>
+                                <artifactId>cafeapp</artifactId>
                                 <type>war</type>
                                 <properties>
                                     <context>${project.build.finalName}</context>
