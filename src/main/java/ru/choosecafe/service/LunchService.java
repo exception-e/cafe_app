@@ -1,7 +1,7 @@
 package ru.choosecafe.service;
 
 import ru.choosecafe.model.Lunch;
-import ru.choosecafe.repository.LunchRepository;
+import ru.choosecafe.repository.LunchDataRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,22 +9,23 @@ import java.util.List;
 @Service
 public class LunchService {
 
-    private final LunchRepository repository;
+    private final LunchDataRepository repository;
 
-    public LunchService(LunchRepository repository)
+    public LunchService(LunchDataRepository repository)
     {
         this.repository = repository;
     }
 
     public List<Lunch> getAll() {
-        return repository.findAll();
-    }
-    public Lunch get(Integer id) {
-        return repository.getOne(id);
+        return repository.getAll();
     }
 
-    public void delete(Integer id) {
-            repository.deleteById(id);
+    public Lunch get(Integer id) {
+        return repository.get(id);
+    }
+
+    public boolean delete(Integer id) {
+            return repository.delete(id);
     }
 
     public Lunch create(Lunch lunch) {
@@ -36,7 +37,6 @@ public class LunchService {
     }
 
     public List<Lunch> getByRestaurant(Integer id) {
-
-        return repository.findByRestaurant(id);
+        return repository.getByRestaurant(id);
     }
 }

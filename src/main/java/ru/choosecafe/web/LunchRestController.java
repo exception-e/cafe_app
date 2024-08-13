@@ -57,7 +57,7 @@ public class LunchRestController
         lunchService.update(lunch);
     }
 
-    @GetMapping(value = "/by", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/by-restaurant", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Lunch> getByRestaurant(@RequestParam("id") Integer id) {
         return lunchService.getByRestaurant(id);
     }

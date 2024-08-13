@@ -18,7 +18,6 @@ public class UserDataRepository {
         return userRepository.save(user);
     }
 
-
     public boolean delete(int id) {
         return userRepository.delete(id) != 0;
     }
@@ -27,11 +26,9 @@ public class UserDataRepository {
         return userRepository.findById(id).orElse(null);
     }
 
-
     public User getByEmail(String email) {
         return userRepository.getByEmail(email);
     }
-
 
     public List<User> getAll() {
         return userRepository.findAll(SORT_NAME_EMAIL);

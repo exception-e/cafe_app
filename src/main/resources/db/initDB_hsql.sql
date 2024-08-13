@@ -52,12 +52,11 @@ CREATE TABLE LUNCH
 create table VOTE
 (
     id            INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
-    date          date,
+    date          date    NOT NULL,
     user_id       integer NOT NULL,
     restaurant_id integer NOT NULL,
 
-    constraint USERS_VOTE unique (date, user_id),
+    constraint USERS_VOTE unique (restaurant_id, user_id),
     foreign key (user_id) references USERS (id) on delete cascade,
     foreign key (restaurant_id) references RESTAURANT (id)
 );
-
