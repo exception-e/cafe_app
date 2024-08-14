@@ -11,7 +11,7 @@ public class LunchDataRepository{
 
     final LunchRepository lunchRepository;
 
-    private static final Sort SORT_LUNCH_DATE = Sort.by(Sort.Direction.ASC, "lunch_date");
+    private static final Sort SORT_LUNCH_DATE = Sort.by(Sort.Direction.ASC, "date");
 
     public LunchDataRepository(LunchRepository lunchRepository) {
         this.lunchRepository = lunchRepository;
@@ -34,6 +34,6 @@ public class LunchDataRepository{
     }
 
     public List<Lunch> getByRestaurant(Integer id) {
-        return lunchRepository.findByRestaurant(id);
+        return lunchRepository.getByRestaurant(id);
     }
 }

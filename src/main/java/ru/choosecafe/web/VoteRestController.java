@@ -9,33 +9,34 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import ru.choosecafe.model.Lunch;
-import ru.choosecafe.service.LunchService;
+import ru.choosecafe.model.Vote;
+import ru.choosecafe.service.VoteService;
 
 import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = LunchRestController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
-public class LunchRestController
+@RequestMapping(value = VoteRestController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
+public class VoteRestController
 {
-    static final String REST_URL = "rest/admin/lunch";
+    static final String REST_URL = "rest/vote";
 
     @Autowired
-    LunchService lunchService;
+    VoteService voteService;
 
     @GetMapping
-    public List<Lunch> getAll() {
-        return lunchService.getAll();
+    public List<Vote> getAll() {
+        return voteService.getAll();
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Lunch get(@PathVariable("id") int id) {
-        return lunchService.get(id);
+    public Vote get(@PathVariable("id") int id) {
+        return voteService.get(id);
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Lunch> createWithLocation(@RequestBody Lunch lunch) {
-        Lunch created = lunchService.create(lunch);
+    public ResponseEntity<Vote> createWithLocation(@RequestBody Vote vote) {
+        Vote created = voteService.create(vote);
 
 //        HttpHeaders httpHeaders = new HttpHeaders();
 //        httpHeaders.setLocation(uriOfNewResource);
@@ -50,17 +51,11 @@ public class LunchRestController
     @DeleteMapping(value = "/{id}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void delete(@PathVariable("id") int id) {
-        lunchService.delete(id);
-    }
-
-    @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public void update(@RequestBody Lunch lunch) {
-        lunchService.update(lunch);
+        voteService.delete(id);
     }
 
     @GetMapping(value = "/by-restaurant", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Lunch> getByRestaurant(@RequestParam("id") Integer id) {
-        return lunchService.getByRestaurant(id);
+    public List<Vote> getByRestaurant(@RequestParam("id") Integer id) {
+        return voteService.getByRestaurant(id);
     }
 }

@@ -1,8 +1,12 @@
 package ru.choosecafe.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Entity
@@ -20,7 +24,10 @@ public class Vote extends AbstractBaseEntity {
     private User user;
 
     @ManyToOne
-    @JoinColumn(name="restaurant_id")
+    @NotNull
+    @JoinColumn(name = "restaurant_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
     private Restaurant restaurant;
 
     public Vote(LocalDate date, User user, Restaurant restaurant) {

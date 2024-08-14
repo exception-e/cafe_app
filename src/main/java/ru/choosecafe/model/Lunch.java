@@ -1,5 +1,8 @@
 package ru.choosecafe.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -25,6 +28,8 @@ public class Lunch extends AbstractBaseEntity{
     @ManyToOne
     @NotNull
     @JoinColumn(name = "restaurant_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
     Restaurant restaurant;
 
     @Column(name = "date", nullable = false)
@@ -54,6 +59,22 @@ public class Lunch extends AbstractBaseEntity{
 
     public void setPrice(Integer price) {
         this.price = price;
+    }
+
+    public Restaurant getRestaurant() {
+        return restaurant;
+    }
+
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
     @Override

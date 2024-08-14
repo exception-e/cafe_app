@@ -8,37 +8,38 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import ru.choosecafe.model.Lunch;
+import ru.choosecafe.model.Restaurant;
+import ru.choosecafe.model.User;
 import ru.choosecafe.service.LunchService;
+import ru.choosecafe.service.RestaurantService;
+import ru.choosecafe.to.UserTo;
 
 import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = LunchRestController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
-public class LunchRestController
+@RequestMapping(value = RestaurantRestController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
+public class RestaurantRestController
 {
-    static final String REST_URL = "rest/admin/lunch";
+    static final String REST_URL = "rest/admin/restaurant";
 
     @Autowired
-    LunchService lunchService;
+    RestaurantService restaurantService;
 
     @GetMapping
-    public List<Lunch> getAll() {
-        return lunchService.getAll();
+    public List<Restaurant> getAll() {
+        return restaurantService.getAll();
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Lunch get(@PathVariable("id") int id) {
-        return lunchService.get(id);
+    public Restaurant get(@PathVariable("id") int id) {
+        return restaurantService.get(id);
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Lunch> createWithLocation(@RequestBody Lunch lunch) {
-        Lunch created = lunchService.create(lunch);
+    public ResponseEntity<Restaurant> createWithLocation(@RequestBody Restaurant restaurant) {
+        Restaurant created = restaurantService.create(restaurant);
 
-//        HttpHeaders httpHeaders = new HttpHeaders();
-//        httpHeaders.setLocation(uriOfNewResource);
 
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path(REST_URL + "/{id}")
@@ -50,17 +51,12 @@ public class LunchRestController
     @DeleteMapping(value = "/{id}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void delete(@PathVariable("id") int id) {
-        lunchService.delete(id);
+        restaurantService.delete(id);
     }
 
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public void update(@RequestBody Lunch lunch) {
-        lunchService.update(lunch);
-    }
-
-    @GetMapping(value = "/by-restaurant", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Lunch> getByRestaurant(@RequestParam("id") Integer id) {
-        return lunchService.getByRestaurant(id);
+    public void update(@RequestBody Restaurant restaurant) {
+        restaurantService.update(restaurant);
     }
 }

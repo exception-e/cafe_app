@@ -12,8 +12,8 @@ import java.util.List;
 @Transactional(readOnly = true)
 public interface LunchRepository extends JpaRepository<Lunch, Integer> {
 
-    @Query("select l from Lunch l where l.restaurant.id = :restaurantId")
-    List<Lunch> findByRestaurant (Integer restaurantId);
+    @Query("select l from Lunch l where l.restaurant.id = :restaurant_id")
+    List<Lunch> getByRestaurant (@Param("restaurant_id")Integer id);
 
     @Transactional
     @Modifying

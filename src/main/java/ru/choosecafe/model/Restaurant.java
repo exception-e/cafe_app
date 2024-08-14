@@ -1,5 +1,6 @@
 package ru.choosecafe.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -22,13 +23,22 @@ public class Restaurant extends AbstractBaseEntity {
         return name;
     }
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "restaurant")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant")
     @OnDelete(action = OnDeleteAction.CASCADE)
     @BatchSize(size = 200)
+    @JsonIgnore
     Set<Lunch> lunches;
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Set<Lunch> getLunches() {
+        return lunches;
+    }
+
+    public void setLunches(Set<Lunch> lunches) {
+        this.lunches = lunches;
     }
 
     @Override
