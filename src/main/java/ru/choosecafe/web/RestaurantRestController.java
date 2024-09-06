@@ -13,6 +13,7 @@ import ru.choosecafe.model.User;
 import ru.choosecafe.service.LunchService;
 import ru.choosecafe.service.RestaurantService;
 import ru.choosecafe.to.UserTo;
+import ru.choosecafe.util.exception.IllegalRequestDataException;
 
 import java.net.URI;
 import java.util.List;
@@ -21,42 +22,50 @@ import java.util.List;
 @RequestMapping(value = RestaurantRestController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class RestaurantRestController
 {
-    static final String REST_URL = "rest/admin/restaurant";
+    static final String REST_URL = "rest";
+    // POST rest/admin/restaurant
+    // GET rest/admin/restaurant/{id}
+    // GET rest/restaurants
 
     @Autowired
     RestaurantService restaurantService;
 
-    @GetMapping
+    @GetMapping(value = "/restaurants")
     public List<Restaurant> getAll() {
         return restaurantService.getAll();
     }
 
-    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/admin/restaurant/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Restaurant get(@PathVariable("id") int id) {
         return restaurantService.get(id);
     }
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/admin/restaurant", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Restaurant> createWithLocation(@RequestBody Restaurant restaurant) {
         Restaurant created = restaurantService.create(restaurant);
 
 
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path(REST_URL + "/{id}")
+                .path(REST_URL + "admin/restaurant/{id}")
                 .buildAndExpand(created.getId()).toUri();
 
         return ResponseEntity.created(uriOfNewResource).body(created);
     }
 
-    @DeleteMapping(value = "/{id}")
+    @DeleteMapping(value = "/admin/restaurant/{id}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void delete(@PathVariable("id") int id) {
         restaurantService.delete(id);
     }
 
-    @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/admin/restaurant/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public void update(@RequestBody Restaurant restaurant) {
+    public void update(@RequestBody Restaurant restaurant, @PathVariable("id") int id) {
+        if (restaurant.isNew()) {
+            restaurant.setId(id);
+        } else if (restaurant.getId() != id) {
+            throw new IllegalRequestDataException(restaurant + " must be with id=" + id);
+        }
         restaurantService.update(restaurant);
     }
 }

@@ -13,6 +13,7 @@ import ru.choosecafe.model.Vote;
 import ru.choosecafe.service.VoteService;
 
 import java.net.URI;
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -55,7 +56,13 @@ public class VoteRestController
     }
 
     @GetMapping(value = "/by-restaurant", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Vote> getByRestaurant(@RequestParam("id") Integer id) {
-        return voteService.getByRestaurant(id);
+    public List<Vote> getByRestaurant(@RequestParam("id") Integer id, @RequestParam("date")LocalDate date) {
+        return voteService.getByRestaurant(id, date);
+    }
+
+    @GetMapping(value = "/by-restaurant_today", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Vote> getByRestaurantToday(@RequestParam("id") Integer id) {
+        LocalDate date = LocalDate.now();
+        return voteService.getByRestaurant(id, date);
     }
 }

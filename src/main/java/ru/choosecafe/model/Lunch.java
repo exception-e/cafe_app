@@ -40,7 +40,8 @@ public class Lunch extends AbstractBaseEntity{
     public Lunch() {
     }
 
-    public Lunch(String name, Integer price) {
+    public Lunch(Integer id, String name, Integer price) {
+        super(id);
         this.name = name;
         this.price = price;
     }

@@ -30,7 +30,8 @@ public class Vote extends AbstractBaseEntity {
     @JsonIgnore
     private Restaurant restaurant;
 
-    public Vote(LocalDate date, User user, Restaurant restaurant) {
+    public Vote(Integer id, LocalDate date, User user, Restaurant restaurant) {
+        super(id);
         this.date = date;
         this.user = user;
         this.restaurant = restaurant;

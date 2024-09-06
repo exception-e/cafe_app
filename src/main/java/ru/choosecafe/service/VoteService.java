@@ -5,6 +5,7 @@ import ru.choosecafe.repository.VoteDataRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -37,8 +38,8 @@ public class VoteService {
         return repository.delete(id);
     }
 
-    public List<Vote> getByRestaurant(Integer id)
+    public List<Vote> getByRestaurant(Integer id, LocalDate date)
     {
-        return repository.getByRestaurant(id);
+        return repository.getByRestaurant(id, date);
     }
 }

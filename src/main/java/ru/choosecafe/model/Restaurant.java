@@ -41,6 +41,14 @@ public class Restaurant extends AbstractBaseEntity {
         this.lunches = lunches;
     }
 
+    public Restaurant(Integer id, String name) {
+        super(id);
+        this.name = name;
+    }
+
+    public Restaurant() {
+    }
+
     @Override
     public String toString() {
         return "Restaurant{" +

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 import ru.choosecafe.model.Lunch;
 import ru.choosecafe.model.Vote;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository
@@ -34,7 +35,7 @@ public class VoteDataRepository {
         return voteRepository.findById(id).orElse(null);
     }
 
-    public List<Vote> getByRestaurant(Integer id) {
-        return voteRepository.getByRestaurant(id);
+    public List<Vote> getByRestaurant(Integer id, LocalDate date) {
+        return voteRepository.getByRestaurant(id, date);
     }
 }
