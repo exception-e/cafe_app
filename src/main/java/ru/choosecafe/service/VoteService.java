@@ -18,12 +18,12 @@ public class VoteService {
         this.repository = repository;
     }
 
-    public Vote create(Vote vote) {
-        return repository.save(vote);
+    public Vote create(Vote vote, int user_id, int restaurant_id) {
+        return repository.save(vote, user_id, restaurant_id);
     }
 
-    public Vote update(Vote vote) {
-        return repository.save(vote);
+    public Vote update(Vote vote, int user_id, int restaurant_id) {
+        return repository.save(vote, user_id, restaurant_id);
     }
 
     public Vote get(Integer id) {
@@ -38,8 +38,15 @@ public class VoteService {
         return repository.delete(id);
     }
 
-    public List<Vote> getByRestaurant(Integer id, LocalDate date)
-    {
-        return repository.getByRestaurant(id, date);
+    public Integer countByRestaurantAndDate(Integer id, LocalDate date){
+        return repository.countByRestaurantAndDate(id, date);
+    }
+
+    public Integer getWinnerRestaurantByDate(LocalDate date){
+        return repository.getWinnerRestaurantByDate(date);
+    }
+
+    public List<Vote> getByDateAndUser(Integer userId, LocalDate date) {
+        return repository.getByDateAndUser(userId, date);
     }
 }

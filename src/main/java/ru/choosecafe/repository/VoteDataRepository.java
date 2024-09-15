@@ -1,8 +1,9 @@
 package ru.choosecafe.repository;
 
 import org.springframework.data.domain.Sort;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import ru.choosecafe.model.Lunch;
+import org.springframework.transaction.annotation.Transactional;
 import ru.choosecafe.model.Vote;
 
 import java.time.LocalDate;
@@ -11,20 +12,27 @@ import java.util.List;
 @Repository
 public class VoteDataRepository {
 
-    final VoteRepository voteRepository;
+    private final VoteRepository voteRepository;
+    private final UserRepository userRepository;
+    private final RestaurantRepository restaurantRepository;
 
     private static final Sort SORT_DATE = Sort.by(Sort.Direction.ASC, "date");
 
-    public VoteDataRepository(VoteRepository voteRepository) {
+    public VoteDataRepository(VoteRepository voteRepository, UserRepository userRepository, RestaurantRepository restaurantRepository) {
         this.voteRepository = voteRepository;
+        this.userRepository = userRepository;
+        this.restaurantRepository =restaurantRepository;
     }
 
     public List<Vote> getAll(){
         return voteRepository.findAll(SORT_DATE);
     }
 
-    public Vote save (Vote v){
-        return voteRepository.save(v);
+    @Transactional
+    public Vote save(Vote vote, int userId, int restaurant_id) {
+        vote.setUser(userRepository.getReferenceById(userId));
+        vote.setRestaurant(restaurantRepository.getReferenceById(restaurant_id));
+        return voteRepository.save(vote);
     }
 
     public boolean delete(int id) {
@@ -35,7 +43,15 @@ public class VoteDataRepository {
         return voteRepository.findById(id).orElse(null);
     }
 
-    public List<Vote> getByRestaurant(Integer id, LocalDate date) {
-        return voteRepository.getByRestaurant(id, date);
+    public List<Vote> getByDateAndUser(int userId, LocalDate date){
+        return voteRepository.getByDateAndUser(userId, date);
+    }
+
+    public Integer countByRestaurantAndDate(@Param("restaurant_id") int id, @Param("date") LocalDate date){
+        return voteRepository.countByRestaurantAndDate (id, date);
+    }
+
+    public Integer getWinnerRestaurantByDate(LocalDate date){
+        return voteRepository.getWinnerRestaurantByDate(date);
     }
 }

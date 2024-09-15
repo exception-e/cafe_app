@@ -5,7 +5,7 @@ DROP TABLE IF EXISTS LUNCH;
 DROP TABLE IF EXISTS RESTAURANT;
 
 
-DROP SEQUENCE  IF EXISTS GLOBAL_SEQ;
+DROP SEQUENCE IF EXISTS GLOBAL_SEQ;
 
 CREATE SEQUENCE GLOBAL_SEQ
     AS INTEGER
@@ -14,10 +14,10 @@ CREATE SEQUENCE GLOBAL_SEQ
 CREATE TABLE USERS
 (
     id       INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
-    name     VARCHAR(255)         NOT NULL,
-    email    VARCHAR(255)         NOT NULL,
-    password VARCHAR(255)         NOT NULL,
-    enabled  BOOLEAN DEFAULT TRUE NOT NULL,
+    name     VARCHAR(255)                     NOT NULL,
+    email    VARCHAR(255)                     NOT NULL,
+    password VARCHAR(255)                     NOT NULL,
+    enabled  BOOLEAN             DEFAULT TRUE NOT NULL,
 
     constraint USERS_UNIQUE_EMAIL unique (email)
 );
@@ -52,11 +52,12 @@ CREATE TABLE LUNCH
 create table VOTE
 (
     id            INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
-    date          date    NOT NULL,
-    user_id       integer NOT NULL,
-    restaurant_id integer NOT NULL,
+    date          DATE                DEFAULT current_date not null,
+    time          TIME                DEFAULT current_time not null,
+    user_id       integer                                  NOT NULL,
+    restaurant_id integer                                  NOT NULL,
 
-    constraint USERS_VOTE unique (restaurant_id, user_id),
+
     foreign key (user_id) references USERS (id) on delete cascade,
     foreign key (restaurant_id) references RESTAURANT (id)
 );
