@@ -1,5 +1,7 @@
 package ru.choosecafe.web;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -21,6 +23,7 @@ import java.util.List;
 @RestController
 @RequestMapping(value = VoteRestController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class VoteRestController {
+    private final Logger log = LoggerFactory.getLogger(getClass());
     static final String REST_URL = "rest";
 
     @Autowired
@@ -28,17 +31,19 @@ public class VoteRestController {
 
     @GetMapping(value = "/admin/votes")
     public List<Vote> getAll() {
+        log.info("getAll");
         return voteService.getAll();
     }
 
     @GetMapping(value = "/admin/vote/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Vote get(@PathVariable("id") int id) {
+        log.info("get {}", id);
         return voteService.get(id);
     }
 
     @PostMapping(value = "/vote", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Vote> createWithLocation(@RequestBody VoteTo voteTo) {
-
+        log.info("create {}", voteTo);
 
         if(voteService.getByDateAndUser(SecurityUtil.authUserId(), LocalDate.now()) != null
         &&
@@ -64,6 +69,7 @@ public class VoteRestController {
     @DeleteMapping(value = "/admin/vote/{id}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void delete(@PathVariable("id") int id) {
+        log.info("delete {}", id);
         voteService.delete(id);
     }
 
@@ -78,21 +84,25 @@ public class VoteRestController {
 
     @GetMapping(value = "/admin/votes/count-by-restaurant-and_date", produces = MediaType.APPLICATION_JSON_VALUE)
     public Integer countByRestaurantAndDate(@RequestParam("id") Integer id, @RequestParam("date")LocalDate date){
+        log.info("countByRestaurantAndDate {}, {}", id, date);
         return voteService.countByRestaurantAndDate(id, date);
     }
 
     @GetMapping(value = "/admin/votes/count-by-restaurant-today", produces = MediaType.APPLICATION_JSON_VALUE)
     public Integer countByRestaurantToday(@RequestParam("id") Integer id){
+        log.info("countByRestaurantToday {}", id);
         return voteService.countByRestaurantAndDate(id, LocalDate.now());
     }
 
     @GetMapping(value = "/admin/votes/winner-by-date", produces = MediaType.APPLICATION_JSON_VALUE)
     public Integer getWinnerRestaurantByDate(@RequestParam("date")LocalDate date){
+        log.info("winnerRestaurantByDate {}", date);
         return voteService.getWinnerRestaurantByDate(date);
     }
 
     @GetMapping(value = "/admin/votes/today_winner", produces = MediaType.APPLICATION_JSON_VALUE)
     public Integer getTodayWinnerRestaurant(){
+        log.info("countByRestaurantToday");
         return voteService.getWinnerRestaurantByDate(LocalDate.now());
     }
 }
