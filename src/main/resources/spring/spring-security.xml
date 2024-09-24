@@ -9,11 +9,13 @@
 
     <http pattern="/rest/**" use-expressions="true" name="restSecurityFilterChain" create-session="stateless">
         <http-basic/>
-        <intercept-url pattern="/rest/admin/**" access="permitAll()" />
-<!--                       access="hasRole('ADMIN')"/>-->
+        <intercept-url pattern="/rest/admin/**" access="hasRole('ADMIN')"/>
+<!--                       access="permitAll()" />-->
+
         <intercept-url pattern="/rest/profile" method="POST" access="isAnonymous()"/>
+        <intercept-url pattern="/rest/vote" method="POST" access="isAuthenticated()"/>
+        <intercept-url pattern="/rest/profile" access="isAuthenticated()"/>
         <intercept-url pattern="/**" access="permitAll()" />
-<!--                       access="isAuthenticated()"/>-->
         <csrf disabled="true"/>
     </http>
 

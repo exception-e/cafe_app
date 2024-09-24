@@ -7,7 +7,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import ru.choosecafe.to.UserTo;
 
 import java.net.URI;
 import java.util.List;
@@ -34,9 +33,6 @@ public class AdminRestController extends AbstractUserController
     public ResponseEntity<User> createWithLocation(@RequestBody User user) {
         User created = super.create(user);
 
-//        HttpHeaders httpHeaders = new HttpHeaders();
-//        httpHeaders.setLocation(uriOfNewResource);
-
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path(REST_URL + "/{id}")
                 .buildAndExpand(created.getId()).toUri();
@@ -54,14 +50,21 @@ public class AdminRestController extends AbstractUserController
     @Override
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public void update(@RequestBody UserTo userTo, @PathVariable("id") int id) {
-        super.update(userTo, id);
+    public void update(@RequestBody User user, @PathVariable("id") int id) {
+        super.update(user, id);
     }
 
     @Override
     @GetMapping(value = "/by", produces = MediaType.APPLICATION_JSON_VALUE)
     public User getByMail(@RequestParam("email") String email) {
         return super.getByMail(email);
+    }
+
+    @Override
+    @PatchMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void enable(@PathVariable int id, @RequestParam boolean enabled) {
+        super.enable(id, enabled);
     }
 
 }

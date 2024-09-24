@@ -32,7 +32,7 @@ public class UserTestData {
         return content().json(writeIgnoreProps(expected, "registered"));
     }*/
 
-    public static void checkNew(HasId bean) {
+    public static void checkNew(AbstractBaseEntity bean) {
         if (!bean.isNew()) {
             throw new IllegalArgumentException(bean + " must be new (id=null)");
         }

@@ -14,6 +14,7 @@ public class UserDataRepository {
     public UserDataRepository(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
+
     public User save(User user) {
         return userRepository.save(user);
     }

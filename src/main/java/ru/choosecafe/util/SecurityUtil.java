@@ -2,7 +2,7 @@ package ru.choosecafe.util;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import ru.choosecafe.AuthorizedUser;
+import ru.choosecafe.model.User;
 
 import static java.util.Objects.requireNonNull;
 
@@ -11,20 +11,20 @@ public class SecurityUtil {
     private SecurityUtil() {
     }
 
-    public static AuthorizedUser safeGet() {
+    public static User safeGet() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth == null) {
             return null;
         }
         Object principal = auth.getPrincipal();
-        return (principal instanceof AuthorizedUser) ? (AuthorizedUser) principal : null;
+        return (principal instanceof User) ? (User) principal : null;
     }
 
-    public static AuthorizedUser get() {
+    public static User get() {
         return requireNonNull(safeGet(), "No authorized user found");
     }
 
     public static int authUserId() {
-        return get().getUserTo().id();
+        return get().getId();
     }
 }
