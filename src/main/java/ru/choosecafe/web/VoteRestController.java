@@ -56,9 +56,6 @@ public class VoteRestController {
 
         Vote created = voteService.create(newVote, SecurityUtil.authUserId(), voteTo.getRestaurantId());
 
-//        HttpHeaders httpHeaders = new HttpHeaders();
-//        httpHeaders.setLocation(uriOfNewResource);
-
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path(REST_URL + "/vote/{id}")
                 .buildAndExpand(created.getId()).toUri();
@@ -73,14 +70,6 @@ public class VoteRestController {
         voteService.delete(id);
     }
 
-//    @PutMapping(value = "/vote", consumes = MediaType.APPLICATION_JSON_VALUE)
-//    @ResponseStatus(value = HttpStatus.NO_CONTENT)
-//    public void update(@RequestBody Vote  vote) {
-//        //assureIdConsistent(vote, id);
-//        if(LocalTime.now().isBefore(LocalTime.of(11, 00))) {
-//            voteService.update(vote, SecurityUtil.authUserId());
-//        }
-//    }
 
     @GetMapping(value = "/admin/votes/count-by-restaurant-and_date", produces = MediaType.APPLICATION_JSON_VALUE)
     public Integer countByRestaurantAndDate(@RequestParam("id") Integer id, @RequestParam("date")LocalDate date){
@@ -100,7 +89,7 @@ public class VoteRestController {
         return voteService.getWinnerRestaurantByDate(date);
     }
 
-    @GetMapping(value = "/admin/votes/today_winner", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/votes/today_winner", produces = MediaType.APPLICATION_JSON_VALUE)
     public Integer getTodayWinnerRestaurant(){
         log.info("countByRestaurantToday");
         return voteService.getWinnerRestaurantByDate(LocalDate.now());

@@ -9,12 +9,12 @@ ALTER SEQUENCE global_seq RESTART WITH 100000;
 INSERT INTO users (name, email, password)
 VALUES ('User', 'user@yandex.ru', '{noop}password'),
        ('Admin', 'admin@gmail.com', '{noop}admin'),
-       ('Guest', 'guest@gmail.com', '{noop}guest'),
-       ('Guest1', 'guest1@gmail.com', '{noop}guest1'),
-       ('Guest2', 'guest2@gmail.com', '{noop}guest2'),
-       ('Guest3', 'guest3@gmail.com', '{noop}guest3'),
-       ('Guest4', 'guest4@gmail.com', '{noop}guest4'),
-       ('Guest5', 'guest5@gmail.com', '{noop}guest5');
+       ('User0', 'user0@gmail.com', '{noop}user0'),
+       ('User1', 'user1@gmail.com', '{noop}user1'),
+       ('User2', 'user2@gmail.com', '{noop}user2'),
+       ('User3', 'user3@gmail.com', '{noop}user3'),
+       ('User4', 'user4@gmail.com', '{noop}user4'),
+       ('User5', 'user5@gmail.com', '{noop}user5');
 
 
 INSERT INTO user_role (role, user_id)

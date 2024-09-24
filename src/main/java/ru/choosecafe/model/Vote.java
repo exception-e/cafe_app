@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.format.annotation.DateTimeFormat;
-import ru.choosecafe.HasId;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -13,7 +12,7 @@ import java.time.LocalTime;
 
 @Entity
 @Table(name="vote", uniqueConstraints = @UniqueConstraint(columnNames = {"date", "user_id"}))
-public class Vote extends AbstractBaseEntity implements HasId {
+public class Vote extends AbstractBaseEntity {
 
     public static final String DATE_PATTERN = "yyyy-MM-dd";
     public static final String TIME_PATTERN = "HH:mm";
