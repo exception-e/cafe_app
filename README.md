@@ -1,29 +1,40 @@
-# choose_cafe
+# cafe_App&#176;
 
-side project (active development phase)
+☕🍦🍨🍩🍰🧉🧁🍮🍵 🍷🍟🍕🥪🌮🥙🍚🍛🍜🍢🍣🍤🥤
+***
+Side project (active development phase)  
 build environment: JetBrains Intellij Idea
 
-DB creation script - src/main/resources/db/initDB_hsql.sql.
+DB creation script - src/main/resources/db/initDB_hsql.sql.  
 DB population script - src/main/resources/db/populateDB_hsql.sql.
 
-## Application with REST API using Hibernate/Spring/SpringMVC without frontend.
+## Application with REST API using Hibernate/SpringMVC/SpringSecurity/Postgres/Jackson/Maven without frontend
 
-A voting system for deciding where to have lunch.
+__A voting system for deciding where to have lunch__
 
-• 2 types of users: admin and regular users
+---
++ 2 types of users: admin and regular users 
 
-• Admin can input a restaurant and it's lunch menu of the day (2-5 items usually, just a dish name and price)
++ Admin can input a restaurant and it's lunch menu of the day (2-5 items usually, just a dish name and price)
 
-• Menu changes each day (admins do the updates)
++ Menu changes each day (admins do the updates)
 
-• Users can vote on which restaurant they want to have lunch at
++ Users can vote on which restaurant they want to have lunch at
 
-• Only one vote counted per user
++ Only one vote counted per user
 
-• If user votes again the same day:
++ If user votes again the same day:
 
-	◦ If it is before 11:00 we asume that he changed his mind.
-	◦ If it is after 11:00 then it is too late, vote can't be changed
+    + If it is before 11:00 we asume that he changed his mind.  
+    + If it is after 11:00 then it is too late, vote can't be changed
 
-Each restaurant provides new menu each day.
++ Each restaurant provides new menu each day.
+4^3^
+
+Examples of available rest endpoints:
+
+```
+http://localhost:8080/cafeapp/rest/votes/today_winner
+http://localhost:8080/cafeapp/rest/restaurants
+http://localhost:8080/cafeapp/rest/admin/users
 
