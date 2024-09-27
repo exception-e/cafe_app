@@ -22,9 +22,6 @@ public class RestaurantRestController
 {
     private final Logger log = LoggerFactory.getLogger(getClass());
     static final String REST_URL = "rest";
-    // POST rest/admin/restaurant
-    // GET rest/admin/restaurant/{id}
-    // GET rest/restaurants
 
     @Autowired
     RestaurantDataRepository restaurantDataRepository;
