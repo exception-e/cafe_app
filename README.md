@@ -5,7 +5,7 @@
 Side project (active development phase)  
 build environment: JetBrains Intellij Idea
 
-DB creation script - src/main/resources/db/initDB_hsql.sql.  
+DB creation script - src/main/resources/db/initDB.sql.  
 DB population script - src/main/resources/db/populateDB_hsql.sql.
 
 ## Application with REST API using Hibernate/SpringMVC/SpringSecurity/Postgres/Jackson/Maven without frontend

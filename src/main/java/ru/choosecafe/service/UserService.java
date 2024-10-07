@@ -4,6 +4,7 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -45,11 +46,6 @@ public class UserService implements UserDetailsService {
         return checkNotFoundWithId(repository.get(id), id);
     }
 
-    public User getByEmail(String email) {
-        Assert.notNull(email, "email must not be null");
-        return checkNotFound(repository.getByEmail(email), "email=" + email);
-    }
-
     @Cacheable("users")
     public List<User> getAll() {
         return repository.getAll();
@@ -81,7 +77,7 @@ public class UserService implements UserDetailsService {
         return repository.save(prepareToSave(user, passwordEncoder));
     }
 
-    public static User prepareToSave(User user, PasswordEncoder passwordEncoder) {
+    private User prepareToSave(User user, PasswordEncoder passwordEncoder) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setEmail(user.getEmail().toLowerCase());
         return user;

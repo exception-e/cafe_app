@@ -14,8 +14,6 @@ import ru.choosecafe.repository.LunchDataRepository;
 import java.net.URI;
 import java.util.List;
 
-import static ru.choosecafe.UserTestData.assureIdConsistent;
-
 @RestController
 @RequestMapping(value = LunchRestController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class LunchRestController
@@ -61,7 +59,6 @@ public class LunchRestController
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void update(@RequestBody Lunch lunch, @PathVariable int id) {
         log.info("update {} with id={}", lunch, id);
-        assureIdConsistent(lunch, id);
         lunchDataRepository.save(lunch);
     }
 

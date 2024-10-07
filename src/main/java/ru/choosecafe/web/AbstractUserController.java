@@ -48,7 +48,7 @@ public abstract class AbstractUserController {
 
     public User getByMail(String email) {
         log.info("getByEmail {}", email);
-        return service.getByEmail(email);
+        return service.loadUserByUsername(email);
     }
 
     public void enable(int id, boolean enabled) {
