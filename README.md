@@ -2,7 +2,7 @@
 
 ☕🍦🍨🍩🍰🧉🧁🍮🍵 🍷🍟🍕🥪🌮🥙🍚🍛🍜🍢🍣🍤🥤
 
-Side project (active development phase)  
+Pet project (active development phase)  
 build environment: JetBrains Intellij Idea
 
 DB creation script - src/main/resources/db/initDB.sql.  
