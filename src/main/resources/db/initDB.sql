@@ -1,17 +1,17 @@
-DROP TABLE IF EXISTS USER_ROLE;
-DROP TABLE IF EXISTS VOTE;
-DROP TABLE IF EXISTS USERS;
-DROP TABLE IF EXISTS LUNCH;
-DROP TABLE IF EXISTS RESTAURANT;
+DROP TABLE IF EXISTS user_role;
+DROP TABLE IF EXISTS vote;
+DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS lunch;
+DROP TABLE IF EXISTS restaurant;
 
 
-DROP SEQUENCE IF EXISTS GLOBAL_SEQ;
+DROP SEQUENCE IF EXISTS global_seq;
 
-CREATE SEQUENCE GLOBAL_SEQ
+CREATE SEQUENCE global_seq
     AS INTEGER
     START WITH 100000;
 
-CREATE TABLE USERS
+CREATE TABLE users
 (
     id       INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
     name     VARCHAR(255)                     NOT NULL,
@@ -19,45 +19,46 @@ CREATE TABLE USERS
     password VARCHAR(255)                     NOT NULL,
     enabled  BOOLEAN             DEFAULT TRUE NOT NULL,
 
-    constraint USERS_UNIQUE_EMAIL unique (email)
+    constraint users_email unique (email)
 );
 
-CREATE TABLE USER_ROLE
+CREATE TABLE user_role
 (
     user_id INTEGER NOT NULL,
     role    VARCHAR(255),
 
-    CONSTRAINT USERS_ROLE UNIQUE (user_id, role),
-    FOREIGN KEY (user_id) REFERENCES USERS (id) ON DELETE CASCADE
+    CONSTRAINT users_role UNIQUE (user_id, role),
+    FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
 );
 
-CREATE TABLE RESTAURANT
+CREATE TABLE restaurant
 (
     id   INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
     name VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE LUNCH
+CREATE TABLE lunch
 (
     id            INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
     name          VARCHAR(255) NOT NULL,
-    price         INTEGER      NOT NULL,
+    price_cents   INTEGER      NOT NULL,
     restaurant_id INTEGER      NOT NULL,
     date          DATE         NOT NULL,
 
-    CONSTRAINT NAME_DATE unique (name, date),
-    FOREIGN KEY (restaurant_id) REFERENCES RESTAURANT (id) ON DELETE CASCADE
+    CONSTRAINT name_date unique (name, date),
+    FOREIGN KEY (restaurant_id) REFERENCES restaurant (id) ON DELETE CASCADE
 );
 
-create table VOTE
+create table vote
 (
     id            INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
+    --- Comment
     date          DATE                DEFAULT current_date not null,
     time          TIME                DEFAULT current_time not null,
     user_id       integer                                  NOT NULL,
     restaurant_id integer                                  NOT NULL,
 
 
-    foreign key (user_id) references USERS (id) on delete cascade,
-    foreign key (restaurant_id) references RESTAURANT (id)
+    foreign key (user_id) references users (id) on delete cascade,
+    foreign key (restaurant_id) references restaurant (id) on delete cascade
 );

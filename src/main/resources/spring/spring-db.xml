@@ -48,12 +48,12 @@
               p:testOnConnect="true"
               p:testWhileIdle="true"/>
 
-    <context:component-scan base-package="ru.choosecafe.**.repository"/>
-    <jpa:repositories base-package="ru.choosecafe.**.repository"/>
+    <context:component-scan base-package="ru.cafe_app.**.repository"/>
+    <jpa:repositories base-package="ru.cafe_app.**.repository"/>
 
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
           p:dataSource-ref="dataSource"
-          p:packagesToScan="ru.choosecafe.**.model">
+          p:packagesToScan="ru.cafe_app.**.model">
 
         <property name="jpaPropertyMap">
             <map>
@@ -71,8 +71,8 @@
                 <entry key="#{T(org.hibernate.cfg.AvailableSettings).USE_SECOND_LEVEL_CACHE}" value="true"/>
                 <entry key="#{T(org.hibernate.cfg.AvailableSettings).USE_QUERY_CACHE}" value="false"/> <!--default-->
 
-                <!--                    <entry key="javax.persistence.validation.group.pre-persist" value="ru.choosecafe.View$Persist"/>-->
-                <!--                    <entry key="javax.persistence.validation.group.pre-update" value="ru.choosecafe.View$Persist"/>-->
+                <!--                    <entry key="javax.persistence.validation.group.pre-persist" value="ru.cafe_app.View$Persist"/>-->
+                <!--                    <entry key="javax.persistence.validation.group.pre-update" value="ru.cafe_app.View$Persist"/>-->
                 <!--
                                     <entry key="#{T(org.hibernate.cfg.AvailableSettings).HBM2DDL_SCRIPTS_ACTION}" value="drop-and-create"/>
                                     <entry key="#{T(org.hibernate.cfg.AvailableSettings).HBM2DDL_SCRIPTS_CREATE_TARGET}" value="${CAFEAPP_ROOT}/config/ddl/create.ddl"/>

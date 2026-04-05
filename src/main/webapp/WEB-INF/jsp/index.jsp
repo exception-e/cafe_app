@@ -68,10 +68,10 @@
             Only one vote counted per user<br>
             If user votes again the same day:<br>
             If it is before 11:00 we assume that he changed his mind.<br>
-            If it is after 11:00 then it is too late, vote can't be changed
+            If it is after 11:00 then it is too late, vote can't be changed<br>
             Each restaurant provides a new menu each day.<br>
 
-        <h4>Available rest endpoints:</h4>
+        <h4>Some available rest endpoints:</h4>
 
         GET http://localhost:8080/cafeapp/rest/votes/today_winner
         <br>

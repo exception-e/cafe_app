@@ -8,7 +8,7 @@
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
 
-    <bean class="ru.choosecafe.web.json.JacksonObjectMapper" id="objectMapper" factory-method="getMapper"/>
+    <bean class="ru.cafe_app.rest.json.JacksonObjectMapper" id="objectMapper" factory-method="getMapper"/>
 
     <security:global-method-security secured-annotations="enabled" pre-post-annotations="enabled"/>
 
@@ -35,15 +35,14 @@
     <bean class="org.springframework.format.support.FormattingConversionServiceFactoryBean" id="conversionService">
         <property name="formatters">
             <set>
-                <bean class="ru.choosecafe.web.converter.DateTimeFormatters.LocalTimeFormatter"/>
-                <bean class="ru.choosecafe.web.converter.DateTimeFormatters.LocalDateFormatter"/>
+                <bean class="ru.cafe_app.rest.converter.DateTimeFormatters.LocalTimeFormatter"/>
+                <bean class="ru.cafe_app.rest.converter.DateTimeFormatters.LocalDateFormatter"/>
             </set>
         </property>
     </bean>
 
-    <context:component-scan base-package="ru.choosecafe.**.web"/>
+    <context:component-scan base-package="ru.cafe_app.**.rest"/>
 
-    <!--  all resources inside folder src/main/webapp/resources are mapped so they can be referred to inside JSP files -->
     <mvc:resources mapping="/resources/**" location="/resources/"/>
 
 

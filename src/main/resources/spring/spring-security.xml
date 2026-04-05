@@ -5,8 +5,6 @@
 	http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
 
     <http pattern="/resources/**" security="none"/>
-    <http pattern="/webjars/**" security="none"/>
-
     <http pattern="/rest/**" use-expressions="true" name="restSecurityFilterChain" create-session="stateless">
         <http-basic/>
         <intercept-url pattern="/rest/admin/**" access="hasRole('ADMIN')"/>
@@ -22,7 +20,6 @@
     <beans:bean class="org.springframework.security.crypto.factory.PasswordEncoderFactories" id="passwordEncoder" factory-method="createDelegatingPasswordEncoder"/>
 
 <!--    <http>-->
-<!--        <intercept-url pattern="/login" access="permitAll()"/>-->
 
 <!--        <intercept-url pattern="/swagger-ui.html" access="permitAll()"/>-->
 <!--        <intercept-url pattern="/swagger-resources/**" access="permitAll()"/>-->

@@ -11,7 +11,7 @@
     <name>Cafe app</name>
 
         <properties>
-            <java.version>21</java.version>
+            <java.version>11</java.version>
             <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
             <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
             <spring.version>5.3.32</spring.version>
@@ -19,6 +19,7 @@
             <spring-data-jpa.version>2.7.18</spring-data-jpa.version>
             <jackson.version>2.17.0</jackson.version>
             <tomcat.version>9.0.86</tomcat.version>
+            <jsonassert.version>1.5.1</jsonassert.version>
 
             <!-- Hibernate -->
             <hibernate.version>5.6.15.Final</hibernate.version>
@@ -26,7 +27,7 @@
             <javax-el.version>3.0.1-b12</javax-el.version>
 
             <!--Cache-->
-            <ehcache.version>3.10.8</ehcache.version>
+            <ehcache.version>3.8.1</ehcache.version>
 
 
             <!-- Logging -->
@@ -42,7 +43,7 @@
         </properties>
 
         <build>
-            <finalName>cafeapp</finalName>
+            <finalName>cafe_app</finalName>
             <defaultGoal>package</defaultGoal>
             <plugins>
                 <plugin>
@@ -60,7 +61,6 @@
                     </configuration>
                 </plugin>
                 <plugin>
-                    <!--https://junit.org/junit5/docs/current/user-guide/#running-tests-build-maven -->
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>3.2.5</version>
@@ -69,8 +69,6 @@
                     </configuration>
                 </plugin>
 
-                <!-- http://stackoverflow.com/questions/4305935/is-it-possible-to-supply-tomcat6s-context-xml-file-via-the-maven-cargo-plugin#4417945 -->
-                <!-- https://codehaus-cargo.github.io/cargo/Tomcat+9.x.html -->
                 <plugin>
                     <groupId>org.codehaus.cargo</groupId>
                     <artifactId>cargo-maven3-plugin</artifactId>
@@ -100,8 +98,8 @@
                         </configuration>
                         <deployables>
                             <deployable>
-                                <groupId>ru.choosecafe</groupId>
-                                <artifactId>cafeapp</artifactId>
+                                <groupId>ru.cafe_app</groupId>
+                                <artifactId>cafe_app</artifactId>
                                 <type>war</type>
                                 <properties>
                                     <context>${project.build.finalName}</context>
@@ -173,7 +171,6 @@
                 <version>2.9.2</version>
             </dependency>
 
-
             <!--- ORM -->
             <dependency>
                 <groupId>org.hibernate</groupId>
@@ -191,7 +188,6 @@
                 <version>${hibernate.version}</version>
             </dependency>
 
-            <!--http://hibernate.org/validator/documentation/getting-started/#unified-expression-language-el-->
             <dependency>
                 <groupId>org.glassfish</groupId>
                 <artifactId>javax.el</artifactId>
@@ -215,7 +211,32 @@
                         <groupId>org.glassfish.jaxb</groupId>
                         <artifactId>jaxb-runtime</artifactId>
                     </exclusion>
+                    <exclusion>
+                        <groupId>org.glassfish.jaxb</groupId>
+                        <artifactId>jaxb-core</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>javax.xml.bind</groupId>
+                        <artifactId>jaxb-api</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.glassfish.jaxb</groupId>
+                        <artifactId>txw2</artifactId>
+                    </exclusion>
                 </exclusions>
+            </dependency>
+
+            <dependency>
+                <groupId>javax.xml.bind</groupId>
+                <artifactId>jaxb-api</artifactId>
+                <version>2.3.1</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.glassfish.jaxb</groupId>
+                <artifactId>jaxb-runtime</artifactId>
+                <version>2.3.9</version>
+                <scope>runtime</scope>
             </dependency>
 
             <!--DB-->
@@ -230,13 +251,6 @@
                 <version>${tomcat.version}</version>
                 <scope>provided</scope>
             </dependency>
-
-            <!--https://medium.com/criciumadev/its-time-migrating-to-java-11-5eb3868354f9-->
-<!--            <dependency>-->
-<!--                <groupId>org.glassfish.jaxb</groupId>-->
-<!--                <artifactId>jaxb-runtime</artifactId>-->
-<!--                <version>2.4.0-b180830.0438</version>-->
-<!--            </dependency>-->
 
             <!--Web-->
             <dependency>
@@ -303,6 +317,13 @@
                 <groupId>org.assertj</groupId>
                 <artifactId>assertj-core</artifactId>
                 <version>${assertj.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.skyscreamer</groupId>
+                <artifactId>jsonassert</artifactId>
+                <version>${jsonassert.version}</version>
                 <scope>test</scope>
             </dependency>
         </dependencies>

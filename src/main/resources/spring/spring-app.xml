@@ -5,5 +5,5 @@
     <import resource="spring-cache.xml"/>
     <import resource="spring-security.xml"/>
 
-    <context:component-scan base-package="ru.choosecafe.**.service"/>
+    <context:component-scan base-package="ru.cafe_app.**.service"/>
 </beans>
