@@ -54,7 +54,7 @@ public class VoteRestController {
 
         Vote newVote = new Vote();
 
-        Vote created = voteDataRepository.save(newVote, SecurityUtil.authUserId(), voteTo.getRestaurantId());
+        Vote created = voteDataRepository.save(newVote, SecurityUtil.authUserId(), voteTo.restaurantId());
 
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path(REST_URL + "/vote/{id}")

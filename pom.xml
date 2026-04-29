@@ -11,7 +11,7 @@
     <name>Cafe app</name>
 
         <properties>
-            <java.version>11</java.version>
+            <java.version>17</java.version>
             <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
             <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
             <spring.version>5.3.32</spring.version>
